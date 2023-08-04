@@ -1,0 +1,17 @@
+{
+  "name": "telegrambot",
+  "version": "1.0.0",
+  "description": "TG机器人",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app",
+    "dev": "node app --dev"
+  },
+  "author": "PeterCoast",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
