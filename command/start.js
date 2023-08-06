@@ -5,7 +5,7 @@ export default new Commands(
     new RegExp(/^\/start/),
     "开始命令",
     "start",
-    true,
+    false,
     async msg => {
         bot.sendMessage(msg.chat.id, "hello 欢迎使用本机器人", {
             reply_markup: {

@@ -34,6 +34,10 @@ async function loadEvents() {
 					// 注册监听
 					bot.on(event.event, event.fn)
 					i++
+					// 判断是否需要回调
+					if (event.cb) {
+						bot.on("callback_query", event.cb)
+					}
 				})
 			}
 		}
@@ -85,8 +89,18 @@ export function getName(chat_member) {
 }
 export function delMsg(chat_id, msg_id, time) {
 	setTimeout(() => {
-		bot.deleteMessage(chat_id, msg_id)
+		bot.deleteMessage(chat_id, msg_id).catch(err=>{})
 	}, time || 60000)
+}
+export function isAdministrator(chat_id, user_id) {
+	return bot.getChatAdministrators(chat_id).then(r => {
+		for (let i = 0; i < r.length; i++) {
+			if (r[i].user.id == user_id) {
+				return true
+			}
+		}
+		return false
+	})
 }
 export class Commands {
 	constructor(reg, descript, cmd, isCommands, fn, cb) {
@@ -99,8 +113,9 @@ export class Commands {
 	}
 }
 export class Events {
-	constructor(event, fn) {
+	constructor(event, fn, cb) {
 		this.event = event
 		this.fn = fn
+		this.cb = cb
 	}
 }
