@@ -22,7 +22,7 @@ export default new Commands(
         }
     },
     async query => {
-        const { data, from, message } = query
+        const { data, message } = query
         if (data && typeof data === "string") {
             let cmd = data.split("_")
             if (cmd.length > 1) {
@@ -40,11 +40,11 @@ export default new Commands(
 						`).then(msg => {
                             delMsg(msg.chat.id, msg.message_id)
                         })
+                        bot.deleteMessage(message.chat.id, message.message_id)
                         break;
                 }
             }
         }
-        bot.deleteMessage(message.chat.id, message.message_id)
     }
 )
 
