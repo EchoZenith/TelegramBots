@@ -1,4 +1,4 @@
-import { bot, delMsg, Commands } from "../app.js"
+import { bot, delMsg, Commands, getCmd } from "../app.js"
 
 export default new Commands(
     new RegExp(/^\/file/),
@@ -6,7 +6,7 @@ export default new Commands(
     "file",
     true,
     async msg => {
-        let file_id = msg.text.split(" ")[1]
+        let file_id = getCmd(msg.text)[1]
         if (file_id === null || file_id === undefined || file_id === " " || file_id === "") {
             bot.sendMessage(msg.chat.id, "请输入“/file[空格][文件id]”格式的命令", {
                 reply_to_message_id: msg.message_jd

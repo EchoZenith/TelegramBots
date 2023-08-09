@@ -1,4 +1,4 @@
-import { bot, delMsg, Commands } from "../app.js"
+import { bot, delMsg, Commands, getCmd } from "../app.js"
 import { Config } from "../config.js"
 import axios from 'axios'
 import url from 'url'
@@ -10,7 +10,7 @@ export default new Commands(
     "weather",
     true,
     async msg => {
-        let local = msg.text.split(" ")[1]
+        let local = getCmd(msg.text)[1]
         if (local === null || local === undefined || local === " " || local === "") {
             bot.sendMessage(msg.chat.id, "请输入“/weather[空格][城市名]”格式的命令", {
                 reply_to_message_id: msg.message_jd
