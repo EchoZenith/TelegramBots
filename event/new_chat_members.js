@@ -44,39 +44,52 @@ export default new Events(
             if (cmd.length > 1) {
                 switch (cmd[0]) {
                     case "Question":
-                        if (+cmd[1] + +cmd[2] === +cmd[3] && message.reply_to_message.new_chat_member.id == from.id) {
-                            bot.restrictChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
-                                can_add_web_page_previews: true,
-                                can_send_messages: true,
-                                can_send_other_messages: true,
-                                can_send_documents: true,
-                                can_send_photos: true,
-                                can_send_videos: true,
-                                can_send_audios: true,
-                                until_date: 0
+                        if (message.reply_to_message.new_chat_member.id == from.id) {
+                            if (+cmd[1] + +cmd[2] === +cmd[3]) {
+                                bot.restrictChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
+                                    can_add_web_page_previews: true,
+                                    can_send_messages: true,
+                                    can_send_other_messages: true,
+                                    can_send_documents: true,
+                                    can_send_photos: true,
+                                    can_send_videos: true,
+                                    can_send_audios: true,
+                                    until_date: 0
+                                })
+                                delMsg(message.chat.id, message.message_id, 10)
+                            }
+                        } else {
+                            bot.answerCallbackQuery(query.id, {
+                                text: "请不要乱点！！！"
                             })
-                            delMsg(message.chat.id, message.message_id, 10)
                         }
+
                         break;
                     case "Administrator":
                         const isAdm = await isAdministrator(message.chat.id, from.id)
-                        if (cmd[1] == "question" && cmd[2] == "allow" && isAdm) {
-                            bot.restrictChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
-                                can_add_web_page_previews: true,
-                                can_send_messages: true,
-                                can_send_other_messages: true,
-                                can_send_documents: true,
-                                can_send_photos: true,
-                                can_send_videos: true,
-                                can_send_audios: true,
-                                until_date: 0
+                        if (isAdm) {
+                            if (cmd[1] == "question" && cmd[2] == "allow") {
+                                bot.restrictChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
+                                    can_add_web_page_previews: true,
+                                    can_send_messages: true,
+                                    can_send_other_messages: true,
+                                    can_send_documents: true,
+                                    can_send_photos: true,
+                                    can_send_videos: true,
+                                    can_send_audios: true,
+                                    until_date: 0
+                                })
+                                delMsg(message.chat.id, message.message_id, 10)
+                            } else if (cmd[1] == "question" && cmd[2] == "refuse") {
+                                bot.banChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
+                                    until_date: 0
+                                })
+                                delMsg(message.chat.id, message.message_id, 10)
+                            }
+                        } else {
+                            bot.answerCallbackQuery(query.id, {
+                                text: "请不要乱点！！！"
                             })
-                            delMsg(message.chat.id, message.message_id, 10)
-                        } else if (cmd[1] == "question" && cmd[2] == "refuse" && isAdm) {
-                            bot.banChatMember(message.chat.id, message.reply_to_message.new_chat_member.id, {
-                                until_date: 0
-                            })
-                            delMsg(message.chat.id, message.message_id, 10)
                         }
                         break;
                 }

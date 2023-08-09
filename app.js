@@ -79,7 +79,6 @@ async function loadCommands() {
 		console.log("注册bot的菜单命令出错了", err.message)
 	})
 }
-
 export function getName(chat_member) {
 	let userName = chat_member.first_name
 	if (chat_member.last_name) {
@@ -89,7 +88,7 @@ export function getName(chat_member) {
 }
 export function delMsg(chat_id, msg_id, time) {
 	setTimeout(() => {
-		bot.deleteMessage(chat_id, msg_id).catch(err=>{})
+		bot.deleteMessage(chat_id, msg_id).catch(err => { })
 	}, time || 60000)
 }
 export function isAdministrator(chat_id, user_id) {
@@ -118,4 +117,14 @@ export class Events {
 		this.fn = fn
 		this.cb = cb
 	}
+}
+export function getCmd(text) {
+	const cmd = text.split(" ")
+	const result = []
+	for (let i = 0; i < cmd.length; i++) {
+		if (cmd[i] != " " && cmd[i] != "") {
+			result.push(cmd[i])
+		}
+	}
+	return result
 }

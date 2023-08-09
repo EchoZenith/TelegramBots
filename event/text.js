@@ -1,4 +1,4 @@
-import { Events, bot } from "../app.js";
+import { Events } from "../app.js";
 import { getFile } from "../command/file.js";
 
 export default new Events(

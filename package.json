@@ -1,6 +1,6 @@
 {
   "name": "telegrambot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TG机器人",
   "main": "app.js",
   "type": "module",
