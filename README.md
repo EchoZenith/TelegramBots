@@ -9,7 +9,7 @@ Please, **DO NOT PUSH ANY TOKEN OR API KEY**, I will never accept a pull request
   1. Clone the project:
 
 ```shell
-git clone https://github.com/PeterCoast/TelegramBots.git
+git clone https://github.com/EchoZenith/TelegramBots.git
 ```
   2. Enter the configuration information in the **config .js**
   3. Install dependent packages:
@@ -32,7 +32,7 @@ Feel free to create issues [here](https://github.com/PeterCoast/TelegramBots/iss
 
 MIT License
 
-Copyright (c) 2023 PeterCoast
+Copyright (c) 2023 EchoZenith
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
